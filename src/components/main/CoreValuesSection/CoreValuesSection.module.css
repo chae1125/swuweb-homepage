@@ -1,0 +1,89 @@
+.section {
+  padding: 56px 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 800;
+  color: #0030A8;
+  letter-spacing: -0.6px;
+  margin: 0 0 20px;
+}
+
+.desc {
+  text-align: center;
+  margin: 0 0 50px;
+  color: #0030A8;
+  line-height: 1.6;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 700;
+  color: #0030A8; /* 필요 없으면 제거 가능 */
+}
+
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 840px;
+  margin: 0 auto;
+}
+.card {
+  height: 135px;
+  border-radius: 16px;
+  background: #0B379B;
+  box-shadow: 0 16px 36px rgba(11, 62, 168, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.shape {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.label {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+@media (max-width: 920px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .section {
+    padding: 36px 0;
+  }
+  .card {
+    height: 110px;
+    border-radius: 12px;
+  }
+  .label {
+    left: 14px;
+    bottom: 12px;
+    font-size: 15px;
+  }
+}

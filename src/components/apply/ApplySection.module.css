@@ -1,0 +1,639 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.hero {
+  padding: 76px 0 14px;
+}
+
+.heroCard {
+  border-radius: 22px;
+  padding: 28px 22px;
+  background: rgba(255, 255, 255, 0.70);
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  box-shadow: 0 18px 40px rgba(8, 20, 60, 0.10);
+  backdrop-filter: blur(10px);
+}
+
+.heroText {
+  max-width: 70ch;
+}
+
+.title {
+  font-size: 40px;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+  color: rgba(8, 18, 48, 0.95);
+}
+
+.desc {
+  margin: 0;
+  opacity: 0.84;
+  line-height: 1.7;
+  color: rgba(8, 18, 48, 0.84);
+}
+
+.heroBtns {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.heroHint {
+  margin-top: 12px;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.section {
+  padding: 0;
+}
+
+.h2 {
+  font-size: 20px;
+  margin: 0 0 12px;
+  color: rgba(8, 18, 48, 0.94);
+}
+
+.p {
+  margin: 0 0 14px;
+  opacity: 0.85;
+  line-height: 1.7;
+}
+
+/* info grid */
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 900px) {
+  .infoGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .infoGrid { grid-template-columns: 1fr; }
+}
+
+.infoCard {
+  border-radius: 18px;
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 10px 24px rgba(8, 20, 60, 0.06);
+  padding: 14px;
+}
+
+.infoLabel {
+  font-size: 12px;
+  opacity: 0.72;
+}
+
+.infoValue {
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.infoHint {
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+/* timeline */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.stepDot {
+  width: 10px;
+  height: 10px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(38, 96, 255, 1), rgba(0, 212, 255, 0.8));
+}
+
+.stepBody {
+  border-radius: 18px;
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 10px 24px rgba(8, 20, 60, 0.06);
+  padding: 14px;
+}
+
+.stepTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.stepTitle {
+  font-weight: 800;
+}
+
+.stepIdx {
+  display: inline-block;
+  margin-right: 10px;
+  opacity: 0.6;
+}
+
+.stepDate {
+  font-size: 13px;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.stepDesc {
+  margin-top: 6px;
+  opacity: 0.85;
+  line-height: 1.7;
+}
+
+/* checklist */
+.checkGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 720px) {
+  .checkGrid { grid-template-columns: 1fr; }
+}
+
+.checkCard {
+  border-radius: 18px;
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 10px 24px rgba(8, 20, 60, 0.06);
+  padding: 14px;
+}
+
+.checkTitle {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 800;
+}
+
+.checkIcon {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(38, 96, 255, 0.9);
+}
+
+.checkDesc {
+  margin-top: 6px;
+  opacity: 0.85;
+  line-height: 1.7;
+}
+
+/* CTA block */
+.contactSection {
+  padding: 0 0 90px;
+}
+
+.contact {
+  border-radius: 22px;
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: 0 18px 40px rgba(8, 20, 60, 0.10);
+  padding: 22px;
+}
+
+.contactTitle {
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
+
+.contactDesc {
+  opacity: 0.86;
+  line-height: 1.7;
+  max-width: 72ch;
+}
+
+.contactBtns {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.miniNote {
+  margin-top: 10px;
+  font-size: 12px;
+  opacity: 0.72;
+}
+
+/* buttons */
+.cta,
+.ctaGhost {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.cta {
+  color: white;
+  border: 1px solid rgba(38, 96, 255, 0.28);
+  background: linear-gradient(180deg, rgba(38, 96, 255, 1), rgba(30, 78, 210, 1));
+  box-shadow: 0 12px 26px rgba(38, 96, 255, 0.24);
+}
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(38, 96, 255, 0.30);
+}
+
+.ctaGhost {
+  border: 1px solid rgba(10, 30, 80, 0.12);
+  background: rgba(255, 255, 255, 0.70);
+  color: rgba(8, 18, 48, 0.9);
+}
+.ctaGhost:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(8, 20, 60, 0.10);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+@media (max-width: 560px) {
+  .title { font-size: 32px; }
+  .heroCard { padding: 22px 16px; }
+}
+
+/* ---------- Hero layout (text + countdown) ---------- */
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 900px) {
+  .heroGrid { grid-template-columns: 1fr; }
+}
+
+.heroRight {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+/* ---------- Hero illustration layer ---------- */
+.heroArt {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 22px;
+}
+.heroSvg {
+  position: absolute;
+  right: -40px;
+  bottom: -28px;
+  width: 520px;
+  opacity: 0.9;
+  animation: drift 9s ease-in-out infinite;
+}
+.orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(18px);
+  opacity: 0.55;
+  transform: translateZ(0);
+  animation: floaty 7s ease-in-out infinite;
+}
+.orbA {
+  width: 220px;
+  height: 220px;
+  left: -70px;
+  top: -70px;
+  background: radial-gradient(circle at 30% 30%, rgba(91,140,255,1), rgba(58,79,255,0.0) 70%);
+}
+.orbB {
+  width: 200px;
+  height: 200px;
+  right: 40px;
+  top: 26px;
+  background: radial-gradient(circle at 30% 30%, rgba(0,212,255,1), rgba(0,212,255,0.0) 70%);
+  animation-delay: 0.8s;
+}
+.orbC {
+  width: 260px;
+  height: 260px;
+  right: -90px;
+  bottom: -90px;
+  background: radial-gradient(circle at 30% 30%, rgba(139,123,255,1), rgba(139,123,255,0.0) 70%);
+  animation-delay: 1.3s;
+}
+
+/* ---------- Countdown card ---------- */
+.countdownCard {
+  border-radius: 18px;
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 16px 40px rgba(8, 20, 60, 0.10);
+  padding: 14px;
+}
+
+.countdownTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.countdownLabel {
+  font-weight: 800;
+  color: rgba(8, 18, 48, 0.94);
+}
+
+.kstBadge {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(38, 96, 255, 0.18);
+  background: rgba(38, 96, 255, 0.08);
+  color: rgba(12, 40, 120, 0.9);
+  white-space: nowrap;
+}
+
+.timeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.timeBox {
+  border-radius: 16px;
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  background: rgba(255, 255, 255, 0.72);
+  padding: 12px 10px;
+  text-align: center;
+  box-shadow: 0 10px 22px rgba(8, 20, 60, 0.06);
+}
+
+.timeValue {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: rgba(8, 18, 48, 0.95);
+  animation: tick 1s ease-in-out infinite;
+  transform-origin: 50% 70%;
+}
+
+.timeUnit {
+  margin-top: 4px;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.countdownHint {
+  margin-top: 10px;
+  font-size: 12px;
+  opacity: 0.70;
+}
+
+.countdownDone {
+  padding: 14px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(38, 96, 255, 0.18);
+  background: rgba(38, 96, 255, 0.08);
+  font-weight: 800;
+}
+
+/* micro tag cards */
+.microCards {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.microCard {
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  background: rgba(255, 255, 255, 0.70);
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.92;
+}
+
+/* =========================
+   Motion system
+========================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* reveal 기본 */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(6px);
+  transition: opacity 520ms ease, transform 520ms ease, filter 520ms ease;
+}
+
+.revealIn {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* 스태거 딜레이 변수 --d */
+.infoCard,
+.stepBody,
+.checkCard {
+  animation: popIn 700ms cubic-bezier(.2,.9,.2,1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.reveal:not(.revealIn) .infoCard,
+.reveal:not(.revealIn) .stepBody,
+.reveal:not(.revealIn) .checkCard {
+  animation: none;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* =========================
+   Card hover & press
+========================= */
+.infoCard,
+.stepBody,
+.checkCard,
+.contact,
+.countdownCard {
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  will-change: transform;
+}
+
+.infoCard:hover,
+.stepBody:hover,
+.checkCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 42px rgba(8, 20, 60, 0.12);
+  border-color: rgba(38, 96, 255, 0.22);
+}
+
+.infoCard:active,
+.stepBody:active,
+.checkCard:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* =========================
+   Button shine + bounce
+========================= */
+.cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -30%;
+  width: 60%;
+  height: 220%;
+  transform: rotate(18deg) translateX(-120%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+  opacity: 0.9;
+}
+
+.cta:hover::after {
+  animation: shine 900ms ease;
+}
+
+@keyframes shine {
+  0%   { transform: rotate(18deg) translateX(-120%); }
+  100% { transform: rotate(18deg) translateX(280%); }
+}
+
+.cta:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.ctaGhost:hover {
+  transform: translateY(-2px);
+}
+
+.ctaGhost:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* =========================
+   Hero orbs float (이미 넣어둔 floaty 강화)
+========================= */
+@keyframes floaty {
+  0%   { transform: translateY(0) translateX(0); }
+  50%  { transform: translateY(-12px) translateX(6px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+/* hero svg 살짝 흔들 */
+@keyframes drift {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0.85; }
+  50%  { transform: translateY(-10px) rotate(-1.2deg); opacity: 1; }
+  100% { transform: translateY(0) rotate(0deg); opacity: 0.85; }
+}
+
+/* =========================
+   Countdown 숫자 바운스 (초가 바뀔 때 미세한 느낌)
+========================= */
+@keyframes tick {
+  0%, 85% { transform: translateY(0) scale(1); }
+  92%     { transform: translateY(-1px) scale(1.03); }
+  100%    { transform: translateY(0) scale(1); }
+}
+
+/* =========================
+   Timeline line draw effect
+========================= */
+.timeline {
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(38, 96, 255, 0.35), rgba(0, 212, 255, 0.25));
+  opacity: 0.9;
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 900ms cubic-bezier(.2,.9,.2,1);
+}
+
+.revealIn .timeline::before {
+  transform: scaleY(1);
+}
+
+/* dot도 살짝 펄스 */
+.stepDot {
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); filter: blur(0); }
+  50%      { transform: scale(1.12); filter: blur(0.2px); }
+}
+
+/* =========================
+   Micro tags float
+========================= */
+.microCard {
+  animation: floatTag 5.2s ease-in-out infinite;
+}
+.microCard:nth-child(2) { animation-delay: 0.8s; }
+.microCard:nth-child(3) { animation-delay: 1.4s; }
+
+@keyframes floatTag {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}

@@ -1,0 +1,59 @@
+.page {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* 전역 main > section margin 무효화 */
+.page > section {
+  margin-bottom: 0 !important;
+}
+.page > section + section {
+  margin-top: 28px;
+}
+@media (max-width: 920px) {
+  .page > section + section {
+    margin-top: 18px;
+  }
+}
+
+/* background blobs */
+.bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.blob {
+  position: absolute;
+  filter: blur(44px);
+  opacity: 0.46;
+  transform: translateZ(0);
+}
+.blobBlue {
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle at 30% 30%, #5b8cff, #3a4fff, transparent 70%);
+  top: -140px;
+  left: -140px;
+}
+.blobCyan {
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle at 30% 30%, #00d4ff, #3fd0ff, transparent 70%);
+  top: 260px;
+  right: -120px;
+}
+.blobPurple {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle at 30% 30%, #8b7bff, #6a5cff, transparent 70%);
+  bottom: -220px;
+  left: 18%;
+}
+
+/* content above bg */
+.page > * {
+  position: relative;
+  z-index: 1;
+}

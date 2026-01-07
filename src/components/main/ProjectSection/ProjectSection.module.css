@@ -1,0 +1,180 @@
+.section {
+  padding: 56px 0 120px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: #0030A8;
+  letter-spacing: -0.6px;
+  margin: 0 0 20px;
+}
+
+.desc {
+  text-align: center;
+  margin: 0 0 50px;
+  color: #0030A8;
+  line-height: 1.6;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 700;
+  color: #0030A8; 
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.card {
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid rgba(10, 30, 80, 0.1);
+  box-shadow: 0 18px 40px rgba(10, 30, 80, 0.1);
+  overflow: hidden;
+}
+
+.thumb {
+  min-height: 210px; /* 콘텐츠가 많을 경우 카드가 늘어나도록 고정 높이 대신 최소 높이로 변경 */
+  background: linear-gradient(180deg, rgba(11, 62, 168, 0.08), rgba(11, 62, 168, 0.03));
+  padding-bottom: 18px; /* 썸네일과 하단 텍스트 사이 여유 공간 확보 */
+}
+
+.thumbTop {
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(11, 62, 168, 0.25);
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 900;
+  color: #0b3ea8;
+  background: rgba(11, 62, 168, 0.1);
+  border: 1px solid rgba(11, 62, 168, 0.18);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.thumbBody {
+  padding: 14px 16px;
+  box-sizing: border-box;
+}
+
+.thumbTitle {
+  font-weight: 900;
+  color: #0b3ea8;
+  margin-bottom: 10px;
+}
+
+.line {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(11, 62, 168, 0.16);
+  margin-bottom: 10px;
+}
+
+.lineShort {
+  height: 8px;
+  width: 55%;
+  border-radius: 999px;
+  background: rgba(11, 62, 168, 0.12);
+  margin-bottom: 14px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+
+.thumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 10;   /* ✅ 썸네일 칸 비율 고정 (원하면 16/9, 4/3 등) */
+  object-fit: cover;       /* ✅ 칸을 꽉 채움 (넘치는 부분은 잘림) */
+  display: block;          /* ✅ img 아래 여백 제거 */
+  border-radius: 8px;
+  border: 1px solid rgba(10, 30, 80, 0.12);
+  background: #f4f6fb;
+}
+
+/* Prevent thumbnails from growing too tall on very wide screens */
+@media (min-width: 1200px) {
+  .thumbnail {
+    max-height: 120px;
+    height: auto;
+  }
+}
+
+/* On small screens allow thumbnails to be taller proportionally */
+@media (max-width: 520px) {
+  .thumbnail {
+    max-height: none;
+  }
+}
+
+
+
+.text {
+  padding: 18px 20px;
+  background: #ffffff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.name {
+  font-weight: 900;
+  color: #0b3ea8;
+  margin-bottom: 8px;
+}
+
+.p {
+  color: #5b6b8c;
+  font-weight: 700;
+  line-height: 1.55;
+  font-size: 13px;
+}
+
+@media (max-width: 520px) {
+  .section {
+    padding: 36px 0 80px;
+  }
+  .thumb {
+    height: 140px;
+  }
+  .box,
+  .boxText {
+    height: 72px;
+  }
+  .thumbBody {
+    padding: 10px 12px;
+  }
+}

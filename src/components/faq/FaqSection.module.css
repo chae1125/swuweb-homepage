@@ -1,0 +1,359 @@
+/* ---------- Base ---------- */
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(38, 96, 255, 0.18), transparent 60%),
+    radial-gradient(900px 500px at 90% 0%, rgba(0, 212, 255, 0.12), transparent 55%),
+    linear-gradient(180deg, rgba(248, 250, 255, 1), rgba(245, 247, 255, 1));
+}
+
+.page > section {
+  margin-bottom: 0 !important; /* index.css를 이김 */
+}
+
+/* FAQ 내부는 우리가 원하는 간격으로 */
+.page > section + section {
+  margin-top: 22px; /* 원하는 값으로 */
+}
+
+@media (max-width: 920px) {
+  .page > section + section {
+    margin-top: 14px;
+  }
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 76px 0 0;
+}
+
+.heroCard {
+  border-radius: 22px;
+  padding: 28px 22px;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  box-shadow:
+    0 18px 40px rgba(8, 20, 60, 0.10),
+    0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle glow line */
+.heroCard::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(900px 220px at 20% 0%, rgba(38, 96, 255, 0.22), transparent 60%);
+  pointer-events: none;
+}
+
+.title {
+  font-size: 40px;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+  color: rgba(8, 18, 48, 0.95);
+}
+
+.desc {
+  margin: 0;
+  opacity: 0.82;
+  line-height: 1.7;
+  color: rgba(8, 18, 48, 0.82);
+  max-width: 62ch;
+}
+
+.searchRow {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search {
+  flex: 1;
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid rgba(10, 30, 80, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0 14px;
+  outline: none;
+  box-shadow: 0 6px 18px rgba(8, 20, 60, 0.06);
+  transition: box-shadow 160ms ease, transform 160ms ease, border-color 160ms ease;
+}
+
+.search:focus {
+  border-color: rgba(38, 96, 255, 0.35);
+  box-shadow: 0 10px 24px rgba(38, 96, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+.reset {
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(10, 30, 80, 0.12);
+  background: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  color: rgba(8, 18, 48, 0.9);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.reset:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(8, 20, 60, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.reset:disabled {
+  cursor: default;
+  opacity: 0.5;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ---------- Body ---------- */
+.body {
+  padding: 12px 0 0;
+}
+
+.list {
+  display: grid;
+  gap: 14px;
+}
+
+/* ---------- FAQ Item ---------- */
+.item {
+  border-radius: 18px;
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 10px 24px rgba(8, 20, 60, 0.06);
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  position: relative;
+}
+
+.item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  border-radius: 999px;
+  background: transparent;
+  opacity: 0.9;
+  transition: background 180ms ease;
+}
+
+.item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(8, 20, 60, 0.10);
+  border-color: rgba(38, 96, 255, 0.18);
+}
+
+.open {
+  border-color: rgba(38, 96, 255, 0.26);
+  box-shadow: 0 18px 42px rgba(38, 96, 255, 0.10);
+}
+
+.open::before {
+  background: linear-gradient(180deg, rgba(38, 96, 255, 0.9), rgba(0, 212, 255, 0.7));
+}
+
+.qRow {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  text-align: left;
+  padding: 18px 18px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.qRow:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(38, 96, 255, 0.18);
+  border-radius: 14px;
+  margin: 8px; /* focus ring 여백 */
+}
+
+.qLeft {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(38, 96, 255, 0.18);
+  background: rgba(38, 96, 255, 0.08);
+  color: rgba(12, 40, 120, 0.9);
+  white-space: nowrap;
+}
+
+.qText {
+  font-size: 16px;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(8, 18, 48, 0.95);
+}
+
+/* chevron more polished */
+.chev {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  background: rgba(255, 255, 255, 0.65);
+  position: relative;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.chev::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid rgba(10, 30, 80, 0.62);
+  border-bottom: 2px solid rgba(10, 30, 80, 0.62);
+  transform: rotate(45deg);
+}
+
+.open .chev {
+  transform: rotate(180deg);
+  background: rgba(38, 96, 255, 0.08);
+}
+
+/* Answer */
+.aWrap {
+  overflow: hidden;
+  transition: max-height 260ms ease;
+}
+
+.aInner {
+  padding: 0 18px 18px;
+}
+
+.aText {
+  opacity: 0.9;
+  line-height: 1.8;
+  color: rgba(8, 18, 48, 0.84);
+}
+
+.aText ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+/* empty state */
+.empty {
+  padding: 22px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px dashed rgba(10, 30, 80, 0.18);
+  box-shadow: 0 10px 24px rgba(8, 20, 60, 0.05);
+  color: rgba(8, 18, 48, 0.82);
+}
+
+/* ---------- Contact ---------- */
+.contactSection {
+  padding: 0 0 90px;
+}
+
+.contact {
+  border-radius: 22px;
+  border: 1px solid rgba(10, 30, 80, 0.10);
+  background:
+    radial-gradient(900px 240px at 20% 0%, rgba(38, 96, 255, 0.14), transparent 60%),
+    rgba(255, 255, 255, 0.72);
+  box-shadow: 0 18px 40px rgba(8, 20, 60, 0.10);
+  padding: 22px;
+}
+
+.contactTitle {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: rgba(8, 18, 48, 0.95);
+}
+
+.contactDesc {
+  opacity: 0.86;
+  line-height: 1.7;
+  color: rgba(8, 18, 48, 0.84);
+  max-width: 70ch;
+}
+
+.contactBtns {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.cta,
+.ctaGhost {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.cta {
+  color: white;
+  border: 1px solid rgba(38, 96, 255, 0.28);
+  background: linear-gradient(180deg, rgba(76, 110, 202, 1), rgba(0, 48, 168, 1));
+  box-shadow: 0 12px 26px rgba(38, 96, 255, 0.24);
+}
+
+.cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 34px rgba(38, 96, 255, 0.30);
+}
+
+.ctaGhost {
+  border: 1px solid rgba(10, 30, 80, 0.12);
+  background: rgba(255, 255, 255, 0.70);
+  color: rgba(8, 18, 48, 0.9);
+}
+
+.ctaGhost:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(8, 20, 60, 0.10);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 560px) {
+  .title {
+    font-size: 32px;
+  }
+  .heroCard {
+    padding: 22px 16px;
+  }
+  .qText {
+    font-size: 15px;
+  }
+}

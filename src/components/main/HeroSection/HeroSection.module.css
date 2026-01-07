@@ -1,0 +1,140 @@
+.hero {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f8ff 100%);
+
+  /* ✅ 화면 전체 높이 */
+  min-height: 100vh;
+  min-height: 100dvh; /* 모바일 주소창 변화 대응 */
+
+  /* 기존 padding 유지하면서 가운데 정렬되게 */
+  padding: 64px 0 64px;
+
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 (원하면 제거 가능) */
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 22px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 35px;
+  align-items: center;
+}
+
+.left {
+  position: relative;
+}
+
+.badgeRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.badge,
+.badgeAlt {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+
+.badgeAlt {
+  background: rgba(11, 62, 168, 0.08);
+  color: #0b3ea8;
+}
+
+.title {
+  font-size: 40px;
+  line-height: 1.4;
+  margin: 0 0 14px;
+  color: #0b1b3a;
+  font-weight: 800;
+  letter-spacing: -1.4px;
+}
+
+.desc {
+  margin: 0 0 22px;
+  color: rgba(11, 27, 58, 0.78);
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  line-height: 1.65;
+  font-size: 16px;
+}
+
+.ctaRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.ctaPrimary,
+.ctaGhost {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+}
+
+.ctaPrimary {
+  background: #0b3ea8;
+  color: #fff;
+}
+
+.ctaGhost {
+  background: #fff;
+  color: #0b1b3a;
+  border: 1px solid rgba(10, 30, 80, 0.12);
+}
+
+.ctaArrow {
+  margin-left: 8px;
+}
+
+.right {
+  display: grid;
+  place-items: center;
+}
+
+/* ✅ Spline iframe wrapper */
+.splineWrap {
+  width: 100%;
+  height: 420px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #98acea;
+  border: 1px solid rgba(10, 30, 80, 0.12);
+  box-shadow: 0 16px 36px rgba(11, 62, 168, 0.12);
+  position: relative;
+}
+
+.spline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* responsive */
+@media (max-width: 920px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+  .title {
+    font-size: 40px;
+  }
+  .splineWrap {
+    height: 360px;
+    margin-top: 10px;
+  }
+}

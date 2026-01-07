@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Apple SD Gothic Neo',
+    'Noto Sans KR', 'Malgun Gothic', Arial, sans-serif;
+}
+
+main > section {
+  margin-bottom: 160px; /* 원하는 만큼 */
+}
+
+main > section:last-child {
+  margin-bottom: 0;
+}
+
+/* 반응형: 섹션 간격 축소 */
+@media (max-width: 920px) {
+  main > section {
+    margin-bottom: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  main > section {
+    margin-bottom: 56px;
+  }
+}
