@@ -1,4 +1,3 @@
-import React from "react";
 import pageStyles from "./ApplyPage.module.css";
 
 import Navbar from "../components/layout/Navbar/Navbar";

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./ApplySection.module.css";
 import type { ApplyInfoCard } from "./types";
 import { useReveal } from "./useReveal";
