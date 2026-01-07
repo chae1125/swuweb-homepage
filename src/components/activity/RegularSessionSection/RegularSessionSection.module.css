@@ -291,19 +291,34 @@
     grid-column: span 4;
   }
 }
-@media (max-width: 520px) {
-  /* Mobile: single column */
+@media (max-width: 720px) {
+  /* Mobile: single column (한 줄에 카드 1개) */
   .grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
   /* reset any forced spans */
   .grid > .card { grid-column: auto; }
+  /* ensure bottomBar doesn't overflow on small widths */
+  .bottomBar { left: -10%; width: 120%; }
 }
 
-/* 모바일에서 상세 패널이 inline으로 들어갈 때 레이아웃이 깨지는 이슈 해결
-   - 작은 화면에서는 상세를 그리드 사이에 삽입하는 대신 화면 하단 오버레이로 표시
-   - 오버레이는 최대 높이를 `90vh`로 제한하고 내부는 스크롤 가능 */
-@media (max-width: 720px) {
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .grid > .card {
+    grid-column: 1 / -1 !important;
+  }
+
+  .grid > .detail {
+    grid-column: 1 / -1 !important;
+  }
+
+  .bottomBar { left: -10%; width: 120%; }
+
   .detail {
     position: fixed;
     left: 0;
