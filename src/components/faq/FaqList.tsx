@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import styles from "./FaqSection.module.css";
 import type { FaqItemType } from "./types";
 import FaqItem from "./FaqItem";

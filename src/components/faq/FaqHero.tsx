@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./FaqSection.module.css";
 
 type Props = {
