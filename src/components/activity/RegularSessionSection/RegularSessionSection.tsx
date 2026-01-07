@@ -141,6 +141,16 @@ export default function RegularSessionSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const cardRefs = useRef<Array<HTMLElement | null>>([]);
 
+  // 모바일에서 상세 열릴 때 배경 스크롤을 막아 레이아웃 깨짐 방지
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    if (activeIndex !== null) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [activeIndex]);
+
   function toggle(i: number) {
     setActiveIndex((v) => (v === i ? null : i));
   }

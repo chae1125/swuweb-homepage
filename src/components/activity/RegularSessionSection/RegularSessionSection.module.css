@@ -300,6 +300,40 @@
   .grid > .card { grid-column: auto; }
 }
 
+/* 모바일에서 상세 패널이 inline으로 들어갈 때 레이아웃이 깨지는 이슈 해결
+   - 작은 화면에서는 상세를 그리드 사이에 삽입하는 대신 화면 하단 오버레이로 표시
+   - 오버레이는 최대 높이를 `90vh`로 제한하고 내부는 스크롤 가능 */
+@media (max-width: 720px) {
+  .detail {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+    border-radius: 12px 12px 0 0;
+    margin: 0;
+    z-index: 1200;
+    box-shadow: 0 -12px 40px rgba(10,30,80,0.12);
+    transition: transform 320ms cubic-bezier(.22,.9,.2,1), opacity 200ms ease;
+  }
+
+  /* 내부 여백 조정 */
+  .detailInner {
+    padding: 16px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .detailBody {
+    flex-direction: column;
+  }
+
+  /* 닫기 버튼이 항상 보이도록 우선순위 조정 */
+  .closeBtn { z-index: 1210; }
+}
+
 /* reduce motion */
 @media (prefers-reduced-motion: reduce) {
   .card, .bottomBar { animation: none !important; opacity: 1 !important; transform: none !important; }
