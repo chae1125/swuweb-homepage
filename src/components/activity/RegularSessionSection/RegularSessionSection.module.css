@@ -53,7 +53,11 @@
   position: relative;
   border-radius: 18px;
   border: 1px solid rgba(10, 30, 80, 0.12);
-  background: linear-gradient(180deg, rgba(11, 62, 168, 0.06), rgba(255, 255, 255, 1));
+  background: linear-gradient(
+    180deg,
+    rgba(11, 62, 168, 0.06),
+    rgba(255, 255, 255, 1)
+  );
   box-shadow: 10px 10px 0 rgba(11, 27, 58, 0.08);
   padding: 16px 16px 14px;
   overflow: hidden;
@@ -61,12 +65,13 @@
   /* 등장 애니메이션 */
   opacity: 0;
   transform: translateY(18px) scale(0.98);
-  animation: pop 700ms cubic-bezier(.22,.9,.2,1) forwards;
+  animation: pop 700ms cubic-bezier(0.22, 0.9, 0.2, 1) forwards;
 }
 
 /* when a detail panel is open, add subtle motion to cards for visual depth */
 .detailOpen .card {
-  transition: transform 320ms cubic-bezier(.22,.9,.2,1), opacity 320ms ease;
+  transition: transform 320ms cubic-bezier(0.22, 0.9, 0.2, 1),
+    opacity 320ms ease;
 }
 
 .detailOpen .card[aria-expanded="true"] {
@@ -77,7 +82,8 @@
 .detail {
   grid-column: 1 / -1;
   overflow: hidden;
-  transition: max-height 360ms cubic-bezier(.22,.9,.2,1), opacity 240ms ease;
+  transition: max-height 360ms cubic-bezier(0.22, 0.9, 0.2, 1),
+    opacity 240ms ease;
   opacity: 0;
 }
 
@@ -146,18 +152,36 @@
 }
 
 @media (max-width: 720px) {
-  .detailBody { flex-direction: column; }
-  .detailImages { width: 100%; }
+  .detailBody {
+    flex-direction: column;
+  }
+  .detailImages {
+    width: 100%;
+  }
 }
 
-.card:nth-child(1) { animation-delay: 60ms; }
-.card:nth-child(2) { animation-delay: 150ms; }
-.card:nth-child(3) { animation-delay: 240ms; }
-.card:nth-child(4) { animation-delay: 330ms; }
+.card:nth-child(1) {
+  animation-delay: 60ms;
+}
+.card:nth-child(2) {
+  animation-delay: 150ms;
+}
+.card:nth-child(3) {
+  animation-delay: 240ms;
+}
+.card:nth-child(4) {
+  animation-delay: 330ms;
+}
 
 @keyframes pop {
-  60% { opacity: 1; transform: translateY(0) scale(1.02); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .card:hover {
@@ -234,15 +258,26 @@
   bottom: 0;
   height: 4px;
   width: 160%;
-  background: linear-gradient(90deg, transparent, rgba(11, 62, 168, 0.55), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(11, 62, 168, 0.55),
+    transparent
+  );
   animation: sweep 2.2s ease-in-out infinite;
   opacity: 0.6;
 }
 
 @keyframes sweep {
-  0% { transform: translateX(-10%); }
-  50% { transform: translateX(12%); }
-  100% { transform: translateX(-10%); }
+  0% {
+    transform: translateX(-10%);
+  }
+  50% {
+    transform: translateX(12%);
+  }
+  100% {
+    transform: translateX(-10%);
+  }
 }
 
 /* Note */
@@ -255,7 +290,7 @@
   justify-content: center;
   padding: 12px 14px;
   border-radius: 14px;
-  border: 1px solid rgba(10, 30, 80, 0.10);
+  border: 1px solid rgba(10, 30, 80, 0.1);
   background: rgba(11, 62, 168, 0.05);
 }
 
@@ -290,7 +325,47 @@
   .grid > .card:nth-child(5) {
     grid-column: span 4;
   }
+
+  /* tablet 이하에서는 디테일을 페이지 흐름에서 분리해 하단 모달로 표시 */
+  .detail {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+    border-radius: 12px 12px 0 0;
+    margin: 0;
+    z-index: 1200;
+    box-shadow: 0 -12px 40px rgba(10, 30, 80, 0.12);
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 320ms cubic-bezier(0.22, 0.9, 0.2, 1),
+      opacity 200ms ease;
+  }
+
+  .detailInner {
+    padding: 16px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .detailBody {
+    flex-direction: column;
+  }
+
+  .closeBtn {
+    z-index: 1210;
+  }
+
+  /* 열릴 때 슬라이드업 및 표시 */
+  .detailOpen .detail {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
+
 @media (max-width: 720px) {
   /* Mobile: single column (한 줄에 카드 1개) */
   .grid {
@@ -298,9 +373,14 @@
     gap: 14px;
   }
   /* reset any forced spans */
-  .grid > .card { grid-column: auto; }
+  .grid > .card {
+    grid-column: auto;
+  }
   /* ensure bottomBar doesn't overflow on small widths */
-  .bottomBar { left: -10%; width: 120%; }
+  .bottomBar {
+    left: -10%;
+    width: 120%;
+  }
 }
 
 @media (max-width: 500px) {
@@ -317,7 +397,10 @@
     grid-column: 1 / -1 !important;
   }
 
-  .bottomBar { left: -10%; width: 120%; }
+  .bottomBar {
+    left: -10%;
+    width: 120%;
+  }
 
   .detail {
     position: fixed;
@@ -331,8 +414,9 @@
     border-radius: 12px 12px 0 0;
     margin: 0;
     z-index: 1200;
-    box-shadow: 0 -12px 40px rgba(10,30,80,0.12);
-    transition: transform 320ms cubic-bezier(.22,.9,.2,1), opacity 200ms ease;
+    box-shadow: 0 -12px 40px rgba(10, 30, 80, 0.12);
+    transition: transform 320ms cubic-bezier(0.22, 0.9, 0.2, 1),
+      opacity 200ms ease;
   }
 
   /* 내부 여백 조정 */
@@ -346,13 +430,23 @@
   }
 
   /* 닫기 버튼이 항상 보이도록 우선순위 조정 */
-  .closeBtn { z-index: 1210; }
+  .closeBtn {
+    z-index: 1210;
+  }
 }
 
 /* reduce motion */
 @media (prefers-reduced-motion: reduce) {
-  .card, .bottomBar { animation: none !important; opacity: 1 !important; transform: none !important; }
-  .card:hover { transform: none; box-shadow: 10px 10px 0 rgba(11, 27, 58, 0.08); }
+  .card,
+  .bottomBar {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .card:hover {
+    transform: none;
+    box-shadow: 10px 10px 0 rgba(11, 27, 58, 0.08);
+  }
 }
 
 .detailHeaderText {
