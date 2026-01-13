@@ -51,7 +51,7 @@ export default function ApplyCountdown({ targetISO, label = "모집 시작까지
         </div>
       )}
 
-      <div className={styles.countdownHint}>* 2026년 1월 15일(목) 12:00 기준</div>
+      <div className={styles.countdownHint}>* 2026년 1월 15일(목) 11:00 기준</div>
     </div>
   );
 }

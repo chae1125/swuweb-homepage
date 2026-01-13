@@ -20,10 +20,9 @@ export default function ApplyPage() {
     <>
       <Navbar />
       <main className={pageStyles.page}>
-
         <ApplyHero
-          countdownTargetISO="2026-01-15T12:00:00+09:00"
-          primaryHref=""
+          countdownTargetISO="2026-01-15T11:00:00+09:00"
+          primaryHref="/apply/form"
           primaryLabel="지원서 작성하기"
           secondaryHref="/faq"
           secondaryLabel="FAQ 보기"
@@ -32,10 +31,7 @@ export default function ApplyPage() {
         <ApplyInfoGrid items={APPLY_INFO} />
         <ApplyProcess steps={APPLY_STEPS} />
         <ApplyChecklist items={APPLY_CHECKLIST} />
-        <ApplyCta
-          primaryHref=""
-          secondaryHref="/faq"
-        />
+        <ApplyCta primaryHref="/apply/form" secondaryHref="/faq" />
       </main>
       <Footer />
     </>

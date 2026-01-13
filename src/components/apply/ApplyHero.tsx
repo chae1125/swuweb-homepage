@@ -8,8 +8,6 @@ type Props = {
   primaryLabel: string;
   secondaryHref?: string;
   secondaryLabel?: string;
-
-  // ✅ 카운트다운 타겟
   countdownTargetISO: string;
 };
 
@@ -26,7 +24,6 @@ export default function ApplyHero({
     <section className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.heroCard}>
-          {/* 배경 일러스트(가벼운 SVG) */}
           <div className={styles.heroArt} aria-hidden>
             <span className={`${styles.orb} ${styles.orbA}`} />
             <span className={`${styles.orb} ${styles.orbB}`} />
@@ -64,7 +61,7 @@ export default function ApplyHero({
               </div>
 
               <div className={styles.heroHint}>
-                * 지원서 작성 시간은 약 5~10분 정도예요.
+                * 형식보다는 솔직한 답변을 중요하게 보고 있어요.
               </div>
             </div>
 
