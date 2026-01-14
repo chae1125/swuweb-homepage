@@ -6,10 +6,12 @@ import ApplyPage from "./pages/Apply";
 import ApplyForm from "./pages/ApplyForm";
 import PublicApplicationPage from "./pages/PublicApplicationPage";
 import MyApplicationLookup from "./pages/MyApplicationLookup";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/activities" element={<ActivityPage />} /> 
