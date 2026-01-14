@@ -9,7 +9,7 @@ export const APPLY_INFO: ApplyInfoCard[] = [
 
 export const APPLY_STEPS: ApplyStep[] = [
   { title: "서류 지원", date: "1/15 ~ 1/25", desc: "왜 SWUWEB에 지원하게 되었는지, 어떤 활동을 기대하고 있는지 자유롭게 적어주세요." },
-  { title: "비대면 면접", date: "1/26 ~ 1/28", desc: "지원서 내용을 바탕으로 관심사와 학회 활동에 대해 가볍게 이야기를 나눕니다." },
+  { title: "비대면 면접", date: "1/27 ~ 1/29", desc: "지원서 내용을 바탕으로 관심사와 학회 활동에 대해 가볍게 이야기를 나눕니다." },
   { title: "합격 발표", date: "1/30", desc: "합격 여부는 개별적으로 안내되며, 이후 활동을 위한 채널로 초대됩니다." },
   { title: "OT 시작", date: "2월 첫째 주", desc: "학회 운영 방식과 앞으로의 일정, 팀·스터디 구성을 함께 안내합니다." },
 ];
