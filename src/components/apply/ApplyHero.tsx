@@ -1,5 +1,6 @@
 import styles from "./ApplySection.module.css";
 import ApplyCountdown from "./ApplyCountdown";
+import { useEffect, useMemo, useState } from "react";
 
 type Props = {
   title?: string;
@@ -11,6 +12,8 @@ type Props = {
   countdownTargetISO: string;
 };
 
+const APPLY_OPEN_ISO = "2026-01-15T11:00:00+09:00";
+
 export default function ApplyHero({
   title = "지원하기",
   desc = "혼자서는 만들기 어려웠던 웹 서비스를 함께 완성해보고 싶다면, 지금 함께할 부원을 모집해요.",
@@ -20,6 +23,22 @@ export default function ApplyHero({
   secondaryLabel,
   countdownTargetISO,
 }: Props) {
+  const openAtMs = useMemo(() => new Date(APPLY_OPEN_ISO).getTime(), []);
+  const [nowMs, setNowMs] = useState(() => Date.now());
+
+  useEffect(() => {
+    const t = setInterval(() => setNowMs(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  const isOpen = nowMs >= openAtMs;
+
+  const handleApplyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isOpen) return;
+    e.preventDefault();
+    alert("아직 지원 기간이 아니에요.\n1/15 오전 11시부터 지원할 수 있습니다.");
+  };
+
   return (
     <section className={styles.hero}>
       <div className={styles.container}>
@@ -50,9 +69,15 @@ export default function ApplyHero({
               <p className={styles.desc}>{desc}</p>
 
               <div className={styles.heroBtns}>
-                <a className={styles.cta} href={primaryHref}>
+                <a
+                  className={styles.cta}
+                  href={primaryHref}
+                  onClick={handleApplyClick}
+                  aria-disabled={!isOpen}
+                >
                   {primaryLabel}
                 </a>
+
                 {secondaryHref && secondaryLabel ? (
                   <a className={styles.ctaGhost} href={secondaryHref}>
                     {secondaryLabel}
