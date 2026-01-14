@@ -108,6 +108,17 @@ const ApplyForm: React.FC = () => {
 
   const API_BASE = "https://swuweb-website-production.up.railway.app";
 
+  useEffect(() => {
+    const now = Date.now();
+    const openAt = new Date("2026-01-15T11:00:00+09:00").getTime();
+    const closeAt = new Date("2026-01-26T00:00:00+09:00").getTime();
+
+    if (now < openAt || now >= closeAt) {
+      alert("지원 기간이 종료되었습니다.");
+      navigate("/apply", { replace: true });
+    }
+  }, [navigate]);
+
   const requiredKeys = useMemo<(keyof FormState)[]>(
     () => [
       "name",

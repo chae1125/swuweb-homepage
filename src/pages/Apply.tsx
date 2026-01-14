@@ -36,7 +36,6 @@ export default function ApplyPage() {
       <Navbar />
       <main className={pageStyles.page}>
         <ApplyHero
-          countdownTargetISO="2026-01-15T11:00:00+09:00"
           primaryHref="/apply/form"
           primaryLabel="지원서 작성하기"
           secondaryHref="/faq"
@@ -65,10 +64,11 @@ export default function ApplyPage() {
 
             <p className={pageStyles.modalDesc}>
               제출이 완료되었습니다. 아래의 공유 URL을 복사하여{" "}
-              <b>"내 지원서 확인하기"</b> 탭에 붙여넣기 하시면 제출하신 답변을 다시
-              확인할 수 있습니다.
+              <b>"내 지원서 확인하기"</b> 탭에 붙여넣기 하시면 제출하신 답변을
+              다시 확인할 수 있습니다.
               <br />
-              <b>팝업을 닫으면 URL을 다시 알려드릴 수 없으니</b> 꼭 복사해 주세요.
+              <b>팝업을 닫으면 URL을 다시 알려드릴 수 없으니</b> 꼭 복사해
+              주세요.
             </p>
 
             <div className={pageStyles.urlRow}>

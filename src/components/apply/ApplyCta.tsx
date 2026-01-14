@@ -3,6 +3,7 @@ import styles from "./ApplySection.module.css";
 import { useReveal } from "./useReveal";
 
 const APPLY_OPEN_ISO = "2026-01-15T11:00:00+09:00";
+const APPLY_CLOSE_ISO = "2026-01-26T00:00:00+09:00";
 
 export default function ApplyCta({
   primaryHref,
@@ -14,6 +15,7 @@ export default function ApplyCta({
   const { ref, shown } = useReveal<HTMLDivElement>();
 
   const openAtMs = useMemo(() => new Date(APPLY_OPEN_ISO).getTime(), []);
+  const closeAtMs = useMemo(() => new Date(APPLY_CLOSE_ISO).getTime(), []);
   const [nowMs, setNowMs] = useState(() => Date.now());
 
   useEffect(() => {
@@ -22,13 +24,23 @@ export default function ApplyCta({
   }, []);
 
   const isOpen = nowMs >= openAtMs;
+  const isClosed = nowMs >= closeAtMs;
+  const isWithinPeriod = isOpen && !isClosed;
 
   const handleApplyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (isOpen) return;
-    e.preventDefault();
-    alert("아직 지원 기간이 아니에요.\n1/15 오전 11시부터 지원할 수 있습니다.");
-  };
+    if (isWithinPeriod) return;
 
+    e.preventDefault();
+
+    if (!isOpen) {
+      alert(
+        "아직 지원 기간이 아니에요.\n1/15 오전 11시부터 지원할 수 있습니다."
+      );
+      return;
+    }
+
+    alert("지원이 마감되었습니다.");
+  };
   return (
     <section className={styles.contactSection}>
       <div
@@ -46,10 +58,12 @@ export default function ApplyCta({
 
           <div className={styles.contactBtns}>
             <a
-              className={styles.cta}
+              className={`${styles.cta} ${
+                !isWithinPeriod ? styles.ctaDisabled : ""
+              }`}
               href={primaryHref}
               onClick={handleApplyClick}
-              aria-disabled={!isOpen}
+              aria-disabled={!isWithinPeriod}
             >
               지원서 작성하기
             </a>

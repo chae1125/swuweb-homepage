@@ -9,10 +9,10 @@ type Props = {
   primaryLabel: string;
   secondaryHref?: string;
   secondaryLabel?: string;
-  countdownTargetISO: string;
 };
 
 const APPLY_OPEN_ISO = "2026-01-15T11:00:00+09:00";
+const APPLY_CLOSE_ISO = "2026-01-26T00:00:00+09:00";
 
 export default function ApplyHero({
   title = "지원하기",
@@ -21,9 +21,9 @@ export default function ApplyHero({
   primaryLabel,
   secondaryHref,
   secondaryLabel,
-  countdownTargetISO,
 }: Props) {
   const openAtMs = useMemo(() => new Date(APPLY_OPEN_ISO).getTime(), []);
+  const closeAtMs = useMemo(() => new Date(APPLY_CLOSE_ISO).getTime(), []);
   const [nowMs, setNowMs] = useState(() => Date.now());
 
   useEffect(() => {
@@ -32,11 +32,23 @@ export default function ApplyHero({
   }, []);
 
   const isOpen = nowMs >= openAtMs;
+  const isClosed = nowMs >= closeAtMs;
+  const isWithinPeriod = isOpen && !isClosed;
 
   const handleApplyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (isOpen) return;
+    if (isWithinPeriod) return;
+
     e.preventDefault();
-    alert("아직 지원 기간이 아니에요.\n1/15 오전 11시부터 지원할 수 있습니다.");
+
+    if (!isOpen) {
+      alert(
+        "아직 지원 기간이 아니에요.\n1/15 오전 11시부터 지원할 수 있습니다."
+      );
+      return;
+    }
+
+    // ✅ 마감 후
+    alert("지원이 마감되었습니다.");
   };
 
   return (
@@ -73,7 +85,7 @@ export default function ApplyHero({
                   className={styles.cta}
                   href={primaryHref}
                   onClick={handleApplyClick}
-                  aria-disabled={!isOpen}
+                  aria-disabled={!isWithinPeriod}
                 >
                   {primaryLabel}
                 </a>
@@ -92,7 +104,10 @@ export default function ApplyHero({
 
             {/* ✅ 카운트다운 카드 */}
             <div className={styles.heroRight}>
-              <ApplyCountdown targetISO={countdownTargetISO} />
+              <ApplyCountdown
+                openISO={APPLY_OPEN_ISO}
+                closeISO={APPLY_CLOSE_ISO}
+              />
               <div className={styles.microCards} aria-hidden>
                 <div className={styles.microCard}>React</div>
                 <div className={styles.microCard}>Node.js</div>
