@@ -33,8 +33,8 @@ const Footer = () => {
               Join Us
             </Link>
             <span className={styles.sep}>|</span>
-            <Link className={styles.link} to="/login">
-              Login
+            <Link className={styles.link} to="/apply/check">
+              My Application
             </Link>
           </div>
         </div>

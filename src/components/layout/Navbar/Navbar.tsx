@@ -24,8 +24,8 @@ const Navbar = () => {
             <Link className={styles.link} to="/apply">
               지원하기
             </Link>
-            <Link className={styles.link} to="/login">
-              로그인
+            <Link className={styles.link} to="/apply/check">
+              내 지원서 확인
             </Link>
           </nav>
 
@@ -96,10 +96,10 @@ const Navbar = () => {
             </Link>
             <Link
               className={styles.mobileLink}
-              to="/login"
+              to="/apply/check"
               onClick={() => setOpen(false)}
             >
-              로그인
+              내 지원서 확인
             </Link>
           </nav>
           <div className={styles.mobileIcons}>
