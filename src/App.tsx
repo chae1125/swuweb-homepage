@@ -7,6 +7,7 @@ import ApplyForm from "./pages/ApplyForm";
 import PublicApplicationPage from "./pages/PublicApplicationPage";
 import MyApplicationLookup from "./pages/MyApplicationLookup";
 import ScrollToTop from "./components/ScrollToTop";
+import ApplyPeriodGuard from "./components/ApplyPeriodGuard";
 
 const App = () => {
   return (
@@ -14,12 +15,22 @@ const App = () => {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/activities" element={<ActivityPage />} /> 
-        <Route path="/faq" element={<FAQPage/>} />
+        <Route path="/activities" element={<ActivityPage />} />
+        <Route path="/faq" element={<FAQPage />} />
         <Route path="/apply" element={<ApplyPage />} />
-        <Route path="/apply/form" element={<ApplyForm />} />
+        <Route
+          path="/apply/form"
+          element={
+            <ApplyPeriodGuard>
+              <ApplyForm />
+            </ApplyPeriodGuard>
+          }
+        />
         <Route path="/apply/check" element={<MyApplicationLookup />} />
-        <Route path="/public/application/:token" element={<PublicApplicationPage />} />
+        <Route
+          path="/public/application/:token"
+          element={<PublicApplicationPage />}
+        />
       </Routes>
     </BrowserRouter>
   );
