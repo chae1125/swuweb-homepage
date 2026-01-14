@@ -4,6 +4,8 @@ import ActivityPage from "./pages/Activity";
 import FAQPage from "./pages/FAQ";
 import ApplyPage from "./pages/Apply";
 import ApplyForm from "./pages/ApplyForm";
+import PublicApplicationPage from "./pages/PublicApplicationPage";
+import MyApplicationLookup from "./pages/MyApplicationLookup";
 
 const App = () => {
   return (
@@ -14,7 +16,8 @@ const App = () => {
         <Route path="/faq" element={<FAQPage/>} />
         <Route path="/apply" element={<ApplyPage />} />
         <Route path="/apply/form" element={<ApplyForm />} />
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/apply/check" element={<MyApplicationLookup />} />
+        <Route path="/public/application/:token" element={<PublicApplicationPage />} />
       </Routes>
     </BrowserRouter>
   );
