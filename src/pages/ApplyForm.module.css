@@ -358,3 +358,53 @@ select:focus {
     font-size: 1.55rem;
   }
 }
+
+textarea[readonly], input[readonly] {
+  opacity: 0.95;
+  cursor: default;
+}
+
+.inlineLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.ctaGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 20px;
+  min-width: 180px;
+
+  border-radius: 999px;
+  border: 1px solid rgba(0, 48, 168, 0.25);
+
+  background: rgba(0, 48, 168, 0.06);
+  color: rgba(0, 48, 168, 0.95);
+
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  text-decoration: none;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.ctaGhost:hover {
+  background: rgba(0, 48, 168, 0.12);
+  border-color: rgba(0, 48, 168, 0.45);
+  transform: translateY(-1px);
+}
+
+.ctaGhost:active {
+  transform: translateY(0);
+  background: rgba(0, 48, 168, 0.18);
+}

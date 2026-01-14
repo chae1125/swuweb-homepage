@@ -19,6 +19,7 @@ type FormState = {
   wantToBuild: string;
   portfolio: string;
   extra: string;
+  febStudy: string;
 };
 
 const initialState: FormState = {
@@ -38,6 +39,7 @@ const initialState: FormState = {
   wantToBuild: "",
   portfolio: "",
   extra: "",
+  febStudy: "",
 };
 
 const LIMITS = {
@@ -65,6 +67,7 @@ const labelMap: Record<keyof FormState, string> = {
   problemSolving: "3번 문항",
   participation: "4번 문항",
   wantToBuild: "5번 문항",
+  febStudy: "2월 스터디 참여 가능 여부",
   portfolio: "포트폴리오 링크",
   extra: "추가 이야기",
 };
@@ -103,6 +106,8 @@ const ApplyForm: React.FC = () => {
   const [form, setForm] = useState<FormState>(initialState);
   const navigate = useNavigate();
 
+  const API_BASE = "https://swuweb-website-production.up.railway.app";
+
   const requiredKeys = useMemo<(keyof FormState)[]>(
     () => [
       "name",
@@ -116,6 +121,7 @@ const ApplyForm: React.FC = () => {
       "problemSolving",
       "participation",
       "wantToBuild",
+      "febStudy",
     ],
     []
   );
@@ -154,67 +160,112 @@ const ApplyForm: React.FC = () => {
 
     if (form.yearStatus === "enrolled") {
       if (isBlank(form.grade)) {
-        return {
-          ok: false,
-          message: `필수 항목을 작성해주세요: ${labelMap.grade}`,
-        };
+        return { ok: false, message: `필수 항목: ${labelMap.grade}` };
       }
       if (isBlank(form.semester)) {
-        return {
-          ok: false,
-          message: `필수 항목을 작성해주세요: ${labelMap.semester}`,
-        };
+        return { ok: false, message: `필수 항목: ${labelMap.semester}` };
       }
     }
 
     if (form.yearStatus === "leave") {
       if (isBlank(form.leaveAt)) {
-        return {
-          ok: false,
-          message: `필수 항목을 작성해주세요: ${labelMap.leaveAt}`,
-        };
+        return { ok: false, message: `필수 항목: ${labelMap.leaveAt}` };
       }
     }
 
     if (form.reason.length > LIMITS.reason)
-      return {
-        ok: false,
-        message: `1번 문항은 ${LIMITS.reason}자 이내로 작성해주세요.`,
-      };
+      return { ok: false, message: `1번 문항은 ${LIMITS.reason}자 이내` };
     if (form.experience.length > LIMITS.experience)
-      return {
-        ok: false,
-        message: `2번 문항은 ${LIMITS.experience}자 이내로 작성해주세요.`,
-      };
+      return { ok: false, message: `2번 문항은 ${LIMITS.experience}자 이내` };
     if (form.problemSolving.length > LIMITS.problemSolving)
       return {
         ok: false,
-        message: `3번 문항은 ${LIMITS.problemSolving}자 이내로 작성해주세요.`,
+        message: `3번 문항은 ${LIMITS.problemSolving}자 이내`,
       };
     if (form.participation.length > LIMITS.participation)
       return {
         ok: false,
-        message: `4번 문항은 ${LIMITS.participation}자 이내로 작성해주세요.`,
+        message: `4번 문항은 ${LIMITS.participation}자 이내`,
       };
     if (form.wantToBuild.length > LIMITS.wantToBuild)
-      return {
-        ok: false,
-        message: `5번 문항은 ${LIMITS.wantToBuild}자 이내로 작성해주세요.`,
-      };
+      return { ok: false, message: `5번 문항은 ${LIMITS.wantToBuild}자 이내` };
 
     return { ok: true };
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const v = validate();
     if (!v.ok) {
       alert(v.message);
       return;
     }
-    console.log("지원서 제출 데이터:", form);
-    alert("지원서가 제출되었습니다.");
-    navigate("/apply");
+
+    try {
+      const gradeSemester =
+        form.yearStatus === "enrolled"
+          ? `${form.grade}학년 ${form.semester}학기`
+          : form.leaveAt;
+
+      // ✅ 서버가 null 불가라면: "미작성" 처리(선택만)
+      const safeContent = (v: string) => (v.trim() === "" ? "미작성" : v);
+
+      const body = {
+        answers: [
+          { questionNum: 0, content: safeContent(form.name) },
+          { questionNum: 1, content: safeContent(form.major) },
+          { questionNum: 2, content: safeContent(form.studentId) },
+          { questionNum: 3, content: safeContent(form.yearStatus) },
+          { questionNum: 4, content: safeContent(gradeSemester) },
+          { questionNum: 5, content: safeContent(form.email) },
+          { questionNum: 6, content: safeContent(form.phone) },
+
+          { questionNum: 9, content: safeContent(form.reason) },
+          { questionNum: 10, content: safeContent(form.experience) },
+          { questionNum: 11, content: safeContent(form.problemSolving) },
+          { questionNum: 12, content: safeContent(form.participation) },
+          { questionNum: 13, content: safeContent(form.wantToBuild) },
+          { questionNum: 14, content: safeContent(form.febStudy) },
+
+          // 선택
+          { questionNum: 15, content: safeContent(form.portfolio) },
+          { questionNum: 16, content: safeContent(form.extra) },
+        ],
+      };
+
+      const res = await fetch(`${API_BASE}/application/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        console.error("❌ response body:", text);
+        throw new Error(`HTTP ${res.status} ${text}`);
+      }
+
+      const data = await res.json();
+      const shareUrl = data.shareUrl as string | undefined;
+
+      if (!shareUrl) {
+        alert("제출은 되었지만 shareUrl을 받지 못했습니다.");
+        navigate("/apply");
+        return;
+      }
+
+      // ✅ 성공하면 ApplyPage로 넘기고 팝업은 ApplyPage에서 띄움
+      navigate("/apply", {
+        state: {
+          openPopup: true,
+          shareUrl,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+      alert("제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+    }
   };
 
   return (
@@ -230,7 +281,9 @@ const ApplyForm: React.FC = () => {
           <p className={styles.kicker}>2025-1 SWUWEB Recruit</p>
           <h1 className={styles.title}>SWUWEB 지원서</h1>
           <p className={styles.subTitle}>
-            기본 정보와 질문에 답변해 주세요. 제출 후 수정이 어려울 수 있어요.
+            기본 정보와 질문에 답변해 주세요. 제출 후 수정이 어려울 수 있습니다.
+            <br />
+            작성 중 새로고침이나 페이지 이동 시 내용이 사라질 수 있습니다.
           </p>
         </div>
 
@@ -273,7 +326,9 @@ const ApplyForm: React.FC = () => {
               </label>
 
               <label>
-                학적 상태
+                <span className={styles.inlineLabel}>
+                  학적 상태 <small>(2026-1학기를 기준으로 선택해주세요.)</small>
+                </span>
                 <select
                   name="yearStatus"
                   value={form.yearStatus}
@@ -445,6 +500,20 @@ const ApplyForm: React.FC = () => {
                 <small>
                   {form.wantToBuild.length}/{LIMITS.wantToBuild}
                 </small>
+              </label>
+
+              <label>
+                6. 저희 소학회는 3월이 아닌 방학 중인 2월부터 활동을 시작할
+                예정입니다. 이에 따라 2월 동안 주 1회 비대면 스터디가 진행될
+                예정인데, 해당 일정에 참여 가능하신가요?
+                <small>(필수 사항)</small>
+                <AutosizeTextarea
+                  name="febStudy"
+                  value={form.febStudy}
+                  onChange={handleChange}
+                  required
+                  placeholder="참여 가능 여부를 작성해 주시고, 참여가 어려운 경우 그 사유를 간단히 적어주세요."
+                />
               </label>
 
               <label>
