@@ -1,7 +1,7 @@
 import type { ApplyChecklistItem, ApplyInfoCard, ApplyStep } from "../types";
 
 export const APPLY_INFO: ApplyInfoCard[] = [
-  { label: "모집 대상", value: "서울여자대학교 재학생", hint: "전공/학년 제한 없음" },
+  { label: "모집 대상", value: "서울여자대학교 소프트웨어융합학과 전공생", hint: "본전공·복수전공·부전공 가능 / 학년·경험 제한 없음" },
   { label: "활동 기간", value: "2026.02 ~ 2026.07", hint: "약 6개월" },
   { label: "정규 세션", value: "주 1회", hint: "평일 저녁(스케줄 반영)" },
   { label: "프로젝트", value: "팀 프로젝트 1회", hint: "기획 → 개발 → 데모데이" },
