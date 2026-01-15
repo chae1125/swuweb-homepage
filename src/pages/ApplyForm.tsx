@@ -12,6 +12,7 @@ type FormState = {
   leaveAt: string;
   email: string;
   phone: string;
+  part: "" | "frontend" | "backend";
   reason: string;
   experience: string;
   problemSolving: string;
@@ -32,6 +33,7 @@ const initialState: FormState = {
   leaveAt: "",
   email: "",
   phone: "",
+  part: "",
   reason: "",
   experience: "",
   problemSolving: "",
@@ -62,6 +64,7 @@ const labelMap: Record<keyof FormState, string> = {
   leaveAt: "휴학 전 마지막 이수 학기",
   email: "이메일",
   phone: "전화번호",
+  part: "희망 파트",
   reason: "1번 문항",
   experience: "2번 문항",
   problemSolving: "3번 문항",
@@ -127,6 +130,7 @@ const ApplyForm: React.FC = () => {
       "yearStatus",
       "email",
       "phone",
+      "part",
       "reason",
       "experience",
       "problemSolving",
@@ -231,6 +235,8 @@ const ApplyForm: React.FC = () => {
           { questionNum: 4, content: safeContent(gradeSemester) },
           { questionNum: 5, content: safeContent(form.email) },
           { questionNum: 6, content: safeContent(form.phone) },
+
+          { questionNum: 7, content: safeContent(form.part) },
 
           { questionNum: 9, content: safeContent(form.reason) },
           { questionNum: 10, content: safeContent(form.experience) },
@@ -419,6 +425,29 @@ const ApplyForm: React.FC = () => {
                   required
                 />
               </label>
+            </div>
+          </section>
+
+          <section className={styles.sectionCard}>
+            <div className={styles.sectionHead}>
+              <h2 className={styles.sectionTitle}>📌 지원 분야</h2>
+              <span className={styles.badge}>필수</span>
+            </div>
+
+            <div className={styles.grid}>
+              <label>
+                    희망 파트
+                    <select
+                      name="part"
+                      value={form.part}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">선택</option>
+                      <option value="frontend">프론트엔드</option>
+                      <option value="backend">백엔드</option>
+                    </select>
+                  </label>
             </div>
           </section>
 

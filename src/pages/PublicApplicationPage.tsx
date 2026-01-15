@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useLayoutEffect, useEffect, useMemo, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import styles from "./ApplyForm.module.css";
 
@@ -15,10 +15,11 @@ type FormState = {
   major: string;
   studentId: string;
   yearStatus: "" | "enrolled" | "leave";
-  yearDetail: string; 
+  yearDetail: string;
   email: string;
   phone: string;
 
+  part: "" | "frontend" | "backend";
   reason: string;
   experience: string;
   problemSolving: string;
@@ -30,6 +31,21 @@ type FormState = {
   extra: string;
 };
 
+function useAutosizeTextArea(value: string) {
+  const ref = useRef<HTMLTextAreaElement | null>(null);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    // 높이 초기화 후 scrollHeight로 다시 설정
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  }, [value]);
+
+  return ref;
+}
+
 const initialState: FormState = {
   name: "",
   major: "",
@@ -38,6 +54,7 @@ const initialState: FormState = {
   yearDetail: "",
   email: "",
   phone: "",
+  part: "",
 
   reason: "",
   experience: "",
@@ -66,7 +83,7 @@ const toFormState = (answers: Answer[]): FormState => {
     yearDetail: pick(map, 4),
     email: pick(map, 5),
     phone: pick(map, 6),
-
+    part: (pick(map, 7) as FormState["part"]) ?? "",
     reason: pick(map, 9),
     experience: pick(map, 10),
     problemSolving: pick(map, 11),
@@ -77,6 +94,12 @@ const toFormState = (answers: Answer[]): FormState => {
     portfolio: pick(map, 15),
     extra: pick(map, 16),
   };
+};
+
+const partLabel = (v: FormState["part"]) => {
+  if (v === "frontend") return "프론트엔드";
+  if (v === "backend") return "백엔드";
+  return "";
 };
 
 const statusLabel = (v: FormState["yearStatus"]) => {
@@ -92,7 +115,21 @@ export default function PublicApplicationPage() {
   const [form, setForm] = useState<FormState>(initialState);
   const [createdAt, setCreatedAt] = useState<string>("");
 
-  
+  function AutosizeTextarea({ value }: { value: string }) {
+    const ref = useAutosizeTextArea(value);
+
+    return (
+      <textarea
+        ref={ref}
+        value={value}
+        readOnly
+        // rows는 이제 의미 없어서 최소값만 주거나 빼도 됨
+        rows={1}
+        style={{ overflow: "hidden", resize: "none" }}
+      />
+    );
+  }
+
   useEffect(() => {
     if (!token) return;
 
@@ -124,7 +161,7 @@ export default function PublicApplicationPage() {
       const d = new Date(createdAt);
       const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
 
-    return kst.toLocaleString("ko-KR");
+      return kst.toLocaleString("ko-KR");
     } catch {
       return createdAt;
     }
@@ -237,51 +274,76 @@ export default function PublicApplicationPage() {
 
             <div className={styles.questions}>
               <label>
-                1. SWUWEB에 지원하게 된 계기는 무엇이며, 활동을 통해 어떤 경험을 해보고 싶나요?
-                <textarea value={form.reason} readOnly />
+                지원 파트
+                <input
+                  value={
+                    form.part
+                      ? partLabel(form.part)
+                      : "프론트엔드"
+                  }
+                  readOnly
+                />
+              </label>
+
+              <label>
+                1. SWUWEB에 지원하게 된 계기는 무엇이며, 활동을 통해 어떤 경험을
+                해보고 싶나요?
+                <AutosizeTextarea value={form.reason} />
               </label>
 
               <label>
                 2. 웹 개발 관련 경험이 있다면 자유롭게 적어주세요.
-                <textarea value={form.experience} readOnly />
+                <AutosizeTextarea value={form.experience} />
               </label>
 
               <label>
-                3. 개발 공부나 프로젝트를 진행하면서 어려움을 겪었던 경험이 있다면, 당시 어떤 방식으로 해결하려고 했는지 말씀해주세요.
-                <textarea value={form.problemSolving} readOnly />
+                3. 개발 공부나 프로젝트를 진행하면서 어려움을 겪었던 경험이
+                있다면, 당시 어떤 방식으로 해결하려고 했는지 말씀해주세요.
+                <AutosizeTextarea value={form.problemSolving} />
               </label>
 
               <label>
-                4. 학회 활동을 학기 중 다른 일정(수업, 과제 등)과 병행했을 때, 어느 정도의 시간과 노력을 학회 활동에 투자할 수 있을지 구체적으로 작성해주세요.
-                <textarea value={form.participation} readOnly />
+                4. 학회 활동을 학기 중 다른 일정(수업, 과제 등)과 병행했을 때,
+                어느 정도의 시간과 노력을 학회 활동에 투자할 수 있을지
+                구체적으로 작성해주세요.
+                <AutosizeTextarea value={form.participation} />
               </label>
 
               <label>
-                5. SWUWEB에 합류하게 된다면, 직접 기획하거나 개발해보고 싶은 페이지나 기능이 있다면 설명해주세요.
-                <textarea value={form.wantToBuild} readOnly />
+                5. SWUWEB에 합류하게 된다면, 직접 기획하거나 개발해보고 싶은
+                페이지나 기능이 있다면 설명해주세요.
+                <AutosizeTextarea value={form.wantToBuild} />
               </label>
 
               <label>
                 6. 저희 소학회는 3월이 아닌 방학 중인 2월부터 활동을 시작할
                 예정입니다. 이에 따라 2월 동안 주 1회 비대면 스터디가 진행될
                 예정인데, 해당 일정에 참여 가능하신가요?
-                <textarea value={form.febStudy} readOnly />
+                <AutosizeTextarea value={form.febStudy} />
               </label>
 
               <label>
-                GitHub, 개인 프로젝트, 포트폴리오 페이지 등이 있다면 자유롭게 첨부해주세요.
+                GitHub, 개인 프로젝트, 포트폴리오 페이지 등이 있다면 자유롭게
+                첨부해주세요.
                 <input value={form.portfolio} readOnly />
               </label>
 
               <label>
-                운영진에게 전하고 싶은 말이나 추가로 하고 싶은 이야기가 있다면 자유롭게 적어주세요.
-                <textarea value={form.extra} readOnly />
+                운영진에게 전하고 싶은 말이나 추가로 하고 싶은 이야기가 있다면
+                자유롭게 적어주세요.
+                <AutosizeTextarea value={form.extra} />
               </label>
             </div>
           </section>
 
           <div className={styles.actions}>
-            <Link className={styles.ctaGhost} to="/apply" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })}>
+            <Link
+              className={styles.ctaGhost}
+              to="/apply"
+              onClick={() =>
+                window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+              }
+            >
               모집 페이지로 돌아가기
             </Link>
           </div>
