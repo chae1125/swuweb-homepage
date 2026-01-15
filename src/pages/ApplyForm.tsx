@@ -107,6 +107,8 @@ const AutosizeTextarea: React.FC<
 
 const ApplyForm: React.FC = () => {
   const [form, setForm] = useState<FormState>(initialState);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const API_BASE = "https://swuweb-website-production.up.railway.app";
@@ -217,13 +219,20 @@ const ApplyForm: React.FC = () => {
       return;
     }
 
+    setConfirmOpen(true);
+  };
+
+  const submitApplication = async () => {
+    if (submitting) return;
+
     try {
+      setSubmitting(true);
+
       const gradeSemester =
         form.yearStatus === "enrolled"
           ? `${form.grade}학년 ${form.semester}학기`
           : form.leaveAt;
 
-      // ✅ 서버가 null 불가라면: "미작성" 처리(선택만)
       const safeContent = (v: string) => (v.trim() === "" ? "미작성" : v);
 
       const body = {
@@ -245,7 +254,6 @@ const ApplyForm: React.FC = () => {
           { questionNum: 13, content: safeContent(form.wantToBuild) },
           { questionNum: 14, content: safeContent(form.febStudy) },
 
-          // 선택
           { questionNum: 15, content: safeContent(form.portfolio) },
           { questionNum: 16, content: safeContent(form.extra) },
         ],
@@ -282,6 +290,7 @@ const ApplyForm: React.FC = () => {
     } catch (err) {
       console.error(err);
       alert("제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+      setSubmitting(false);
     }
   };
 
@@ -436,18 +445,18 @@ const ApplyForm: React.FC = () => {
 
             <div className={styles.grid}>
               <label>
-                    희망 파트
-                    <select
-                      name="part"
-                      value={form.part}
-                      onChange={handleChange}
-                      required
-                    >
-                      <option value="">선택</option>
-                      <option value="frontend">프론트엔드</option>
-                      <option value="backend">백엔드</option>
-                    </select>
-                  </label>
+                희망 파트
+                <select
+                  name="part"
+                  value={form.part}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">선택</option>
+                  <option value="frontend">프론트엔드</option>
+                  <option value="backend">백엔드</option>
+                </select>
+              </label>
             </div>
           </section>
 
@@ -595,6 +604,52 @@ const ApplyForm: React.FC = () => {
           </div>
         </form>
       </div>
+      {confirmOpen && (
+        <div
+          className={styles.modalOverlay}
+          role="dialog"
+          aria-modal="true"
+          onClick={() => (submitting ? null : setConfirmOpen(false))}
+        >
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <h3 className={styles.modalTitle}>제출 전 확인</h3>
+
+            <p className={styles.modalDesc}>
+              제출하기 전에 지원하신 내용은 수정할 수 없으니{" "}
+              <b>다시 한 번 꼼꼼히 확인</b> 부탁드립니다.
+              <br />
+              <br />
+              <b>확인</b>을 누르면 지원서가 제출되며, 제출 후{" "}
+              <b>본인 지원서를 확인할 수 있는 링크가 포함된 팝업</b>이 뜰
+              예정입니다.
+              <br />
+              제출하기 버튼 클릭 후에는 <b>잠시만 그대로 기다려주세요.</b>
+            </p>
+
+            <div className={styles.modalActions}>
+              <button
+                type="button"
+                className={styles.closeBtn}
+                disabled={submitting}
+                onClick={() => setConfirmOpen(false)}
+              >
+                취소
+              </button>
+
+              <button
+                type="button"
+                className={styles.copyBtn}
+                disabled={submitting}
+                onClick={() => {
+                  submitApplication();
+                }}
+              >
+                {submitting ? "제출 중..." : "확인"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

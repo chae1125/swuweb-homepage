@@ -359,7 +359,8 @@ select:focus {
   }
 }
 
-textarea[readonly], input[readonly] {
+textarea[readonly],
+input[readonly] {
   opacity: 0.95;
   cursor: default;
 }
@@ -407,4 +408,73 @@ textarea[readonly], input[readonly] {
 .ctaGhost:active {
   transform: translateY(0);
   background: rgba(0, 48, 168, 0.18);
+}
+/* ✅ ApplyPage 모달 톤과 통일 */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 45, 122, 0.28);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 9999;
+}
+
+.modal {
+  width: min(560px, 100%);
+  border-radius: 18px;
+  padding: 18px 18px 16px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(10, 30, 80, 0.1);
+  box-shadow: 0 18px 70px rgba(7, 45, 122, 0.22);
+}
+
+.modalTitle {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 900;
+  color: rgba(7, 45, 122, 0.96);
+  letter-spacing: -0.3px;
+}
+
+.modalDesc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(7, 45, 122, 0.78);
+}
+
+.modalActions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.closeBtn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 48, 168, 0.18);
+  background: rgba(255, 255, 255, 0.65);
+  color: rgba(7, 45, 122, 0.92);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.copyBtn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  background: #0030a8;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.closeBtn:disabled,
+.copyBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
