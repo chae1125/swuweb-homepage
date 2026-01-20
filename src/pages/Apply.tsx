@@ -48,7 +48,6 @@ export default function ApplyPage() {
         <ApplyCta primaryHref="/apply/form" secondaryHref="/faq" />
       </main>
 
-      {/* ✅ 여기! Footer 위에 모달 추가 */}
       {modalOpen && (
         <div
           className={pageStyles.modalOverlay}

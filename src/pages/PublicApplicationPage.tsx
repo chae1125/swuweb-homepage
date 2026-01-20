@@ -67,7 +67,7 @@ const initialState: FormState = {
   extra: "",
 };
 
-const API_BASE = "https://swuweb-website-production.up.railway.app";
+const API_BASE = import.meta.env.VITE_API_BASE as string;
 
 const pick = (map: Map<number, string>, n: number) => map.get(n) ?? "";
 

@@ -111,7 +111,7 @@ const ApplyForm: React.FC = () => {
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  const API_BASE = "https://swuweb-website-production.up.railway.app";
+  const API_BASE = import.meta.env.VITE_API_BASE as string;
 
   useEffect(() => {
     const now = Date.now();
