@@ -108,6 +108,8 @@ const statusLabel = (v: FormState["yearStatus"]) => {
   return "";
 };
 
+const countChars = (v: string) => (v ? v.length : 0);
+
 export default function PublicApplicationPage() {
   const { token } = useParams<{ token: string }>();
   const [loading, setLoading] = useState(true);
@@ -116,19 +118,23 @@ export default function PublicApplicationPage() {
   const [createdAt, setCreatedAt] = useState<string>("");
 
   function AutosizeTextarea({ value }: { value: string }) {
-    const ref = useAutosizeTextArea(value);
+  const ref = useAutosizeTextArea(value);
+  const len = countChars(value);
 
-    return (
+  return (
+    <div className={styles.textareaWrap}>
       <textarea
         ref={ref}
         value={value}
         readOnly
-        // rows는 이제 의미 없어서 최소값만 주거나 빼도 됨
         rows={1}
-        style={{ overflow: "hidden", resize: "none" }}
+        className={styles.textareaReadOnly}
       />
-    );
-  }
+      <span className={styles.charCount}>{len}자</span>
+    </div>
+  );
+}
+
 
   useEffect(() => {
     if (!token) return;
@@ -276,11 +282,7 @@ export default function PublicApplicationPage() {
               <label>
                 지원 파트
                 <input
-                  value={
-                    form.part
-                      ? partLabel(form.part)
-                      : "프론트엔드"
-                  }
+                  value={form.part ? partLabel(form.part) : "프론트엔드"}
                   readOnly
                 />
               </label>

@@ -478,3 +478,36 @@ input[readonly] {
   opacity: 0.65;
   cursor: not-allowed;
 }
+
+.textareaWrap {
+  position: relative;
+  width: 100%;
+}
+
+.textareaReadOnly {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+
+  resize: none !important;
+  overflow: hidden !important;
+
+  padding-bottom: 34px !important;
+}
+
+.charCount {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.55);
+
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2px 8px;
+  border-radius: 999px;
+
+  pointer-events: none;
+  z-index: 2;
+}
