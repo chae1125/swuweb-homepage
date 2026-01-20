@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainPage from "./pages/Main";
 import ActivityPage from "./pages/Activity";
 import FAQPage from "./pages/FAQ";
@@ -8,6 +8,8 @@ import PublicApplicationPage from "./pages/PublicApplicationPage";
 import MyApplicationLookup from "./pages/MyApplicationLookup";
 import ScrollToTop from "./components/ScrollToTop";
 import ApplyPeriodGuard from "./components/ApplyPeriodGuard";
+import AdminApplicationsPage from "./pages/AdminApplicationsPage";
+import AdminRoute from "./routes/AdminRoute";
 
 const App = () => {
   return (
@@ -31,6 +33,14 @@ const App = () => {
           path="/public/application/:token"
           element={<PublicApplicationPage />}
         />
+        <Route path="/admin" element={<Navigate to="/" replace />} />
+
+        <Route element={<AdminRoute />}>
+          <Route
+            path="/admin/applications"
+            element={<AdminApplicationsPage />}
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

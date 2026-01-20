@@ -66,3 +66,96 @@
     margin-bottom: 12px;
   }
 }
+
+/* ===== Admin Password Modal ===== */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1200;
+}
+
+.modal {
+  background: #ffffff;
+  padding: 20px;
+  width: 420px;
+  max-width: 92%;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(2, 6, 23, 0.2);
+}
+
+.modalTitle {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #020617;
+}
+
+.modalDesc {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #0f172a;
+}
+
+.modalInput {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.modalInput:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+
+.cancel {
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f172a;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.cancel:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(2, 6, 23, 0.08);
+}
+
+.submit {
+  background: linear-gradient(90deg, #2563eb, #4f46e5, #7c3aed);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.18);
+}
+
+.modalError {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #dc2626;
+}
