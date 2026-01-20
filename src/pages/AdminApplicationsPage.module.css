@@ -198,3 +198,163 @@
   color: rgba(15, 23, 42, 0.6);
   font-weight: 800;
 }
+
+/* =========================
+   Mobile / Tablet
+   ========================= */
+@media (max-width: 768px) {
+  .page {
+    padding: 18px 14px 44px;
+  }
+
+  /* header: 세로로 */
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .title {
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .sub {
+    font-size: 12px;
+  }
+
+  .headerActions {
+    width: 100%;
+    gap: 8px;
+  }
+
+  /* 버튼이 줄에 꽉 차게 */
+  .ghost {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  /* toolbar: 세로 스택 */
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin: 12px 0 12px;
+  }
+
+  .searchWrap {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .search {
+    padding: 11px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+  }
+
+  .count {
+    min-width: auto;
+    font-size: 12px;
+    text-align: right;
+  }
+
+  .toolbarActions {
+    width: 100%;
+  }
+
+  .primary {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  /* 리스트 카드: 모바일에서 더 '카드'처럼 */
+  .list {
+    gap: 10px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 12px;
+    border-radius: 16px;
+  }
+
+  /* 왼쪽(인덱스+링크+뱃지): 2줄 구조 */
+  .left {
+    width: 100%;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* 인덱스는 작게 */
+  .index {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+    margin-top: 1px;
+  }
+
+  /* url은 모바일에서 최대 폭 풀로 */
+  .url {
+    max-width: 100%;
+    font-size: 13px;
+  }
+
+  /* 뱃지는 줄바꿈될 수 있으니 안정적으로 */
+  .badge {
+    margin-left: auto;
+  }
+
+  /* 버튼 영역: 두 버튼이 반반 차지 */
+  .right {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .small {
+    flex: 1;
+    padding: 11px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+  }
+
+  .state {
+    padding: 28px 0;
+  }
+}
+
+/* =========================
+   Small Mobile (<= 420px)
+   ========================= */
+@media (max-width: 420px) {
+  .page {
+    padding: 16px 12px 40px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .row {
+    padding: 12px;
+  }
+
+  .search {
+    font-size: 13px;
+  }
+
+  .small {
+    padding: 11px 8px;
+    font-size: 12px;
+  }
+
+  .count {
+    font-size: 11px;
+  }
+}
+
