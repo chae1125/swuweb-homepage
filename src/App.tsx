@@ -37,7 +37,7 @@ const App = () => {
 
         <Route element={<AdminRoute />}>
           <Route
-            path="/admin/applications"
+            path="/admin-panel/applications"
             element={<AdminApplicationsPage />}
           />
         </Route>

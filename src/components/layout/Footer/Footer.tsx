@@ -81,7 +81,7 @@ const Footer = () => {
         } catch {}
         closeModal();
 
-        navigate("/admin/applications");
+        navigate("/admin-panel/applications");
       } else {
         setCheckError("비밀번호가 올바르지 않습니다.");
       }
