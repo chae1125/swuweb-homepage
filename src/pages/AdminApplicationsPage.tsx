@@ -4,18 +4,25 @@ import styles from "./AdminApplicationsPage.module.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE as string;
 
+type Application = {
+  applicationShareId: number;
+  link: string;
+  name: string;
+};
+
 type AdminApplicationsResponse = {
-  links: string[];
+  applications: Application[];
 };
 
 export default function AdminApplicationsPage() {
   const navigate = useNavigate();
 
-  const [links, setLinks] = useState<string[]>([]);
+  const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
   const [q, setQ] = useState("");
   const [copiedLink, setCopiedLink] = useState<string | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     const unlocked = sessionStorage.getItem("adminUnlocked") === "true";
@@ -29,9 +36,7 @@ export default function AdminApplicationsPage() {
     try {
       const res = await fetch(`${API_BASE}/admin/applications`, {
         method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
+        headers: { Accept: "application/json" },
       });
 
       if (!res.ok) {
@@ -41,13 +46,13 @@ export default function AdminApplicationsPage() {
 
       const data = (await res.json()) as AdminApplicationsResponse;
 
-      if (!data || !Array.isArray(data.links)) {
+      if (!data || !Array.isArray(data.applications)) {
         setErr("응답 형식이 예상과 달라요.");
         return;
       }
 
-      setLinks(data.links);
-    } catch (e) {
+      setApplications(data.applications);
+    } catch {
       setErr("네트워크 오류가 발생했어요. 연결을 확인해 주세요.");
     } finally {
       setLoading(false);
@@ -61,10 +66,14 @@ export default function AdminApplicationsPage() {
 
   const filtered = useMemo(() => {
     const keyword = q.trim().toLowerCase();
-    if (!keyword) return links;
+    if (!keyword) return applications;
 
-    return links.filter((url) => url.toLowerCase().includes(keyword));
-  }, [links, q]);
+    return applications.filter((a) => {
+      const hay =
+        `${a.applicationShareId} ${a.name ?? ""} ${a.link ?? ""}`.toLowerCase();
+      return hay.includes(keyword);
+    });
+  }, [applications, q]);
 
   const copyToClipboard = async (text: string) => {
     try {
@@ -88,7 +97,7 @@ export default function AdminApplicationsPage() {
   };
 
   const handleCopyAll = () => {
-    copyToClipboard(filtered.join("\n"));
+    copyToClipboard(filtered.map((a) => a.link).join("\n"));
   };
 
   const handleLogout = () => {
@@ -96,6 +105,30 @@ export default function AdminApplicationsPage() {
       sessionStorage.removeItem("adminUnlocked");
     } catch {}
     navigate("/", { replace: true });
+  };
+
+  const handleDelete = async (id: number) => {
+    const ok = window.confirm("해당 지원서 링크를 삭제할까요?");
+    if (!ok) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/admin/applications/${id}`, {
+        method: "DELETE",
+        headers: { Accept: "application/json" },
+      });
+
+      if (!res.ok) {
+        alert("삭제에 실패했어요. (서버 오류)");
+        return;
+      }
+
+      await fetchLinks();
+
+      setToast("삭제되었습니다.");
+      setTimeout(() => setToast(null), 1500);
+    } catch {
+      alert("네트워크 오류가 발생했어요.");
+    }
   };
 
   return (
@@ -109,7 +142,11 @@ export default function AdminApplicationsPage() {
         </div>
 
         <div className={styles.headerActions}>
-          <button className={styles.ghost} onClick={fetchLinks} disabled={loading}>
+          <button
+            className={styles.ghost}
+            onClick={fetchLinks}
+            disabled={loading}
+          >
             {loading ? "불러오는 중..." : "새로고침"}
           </button>
           <button className={styles.ghost} onClick={handleLogout}>
@@ -124,15 +161,19 @@ export default function AdminApplicationsPage() {
             className={styles.search}
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="검색 (id, 도메인, 경로 등)"
+            placeholder="검색 (id, 이름, 링크, 도메인, 경로 등)"
           />
           <div className={styles.count}>
-            {filtered.length} / {links.length}
+            {filtered.length} / {applications.length}
           </div>
         </div>
 
         <div className={styles.toolbarActions}>
-          <button className={styles.primary} onClick={handleCopyAll} disabled={!filtered.length}>
+          <button
+            className={styles.primary}
+            onClick={handleCopyAll}
+            disabled={!filtered.length}
+          >
             전체 복사
           </button>
         </div>
@@ -146,27 +187,57 @@ export default function AdminApplicationsPage() {
         ) : filtered.length === 0 ? (
           <div className={styles.state}>표시할 링크가 없어요.</div>
         ) : (
-          filtered.map((url, idx) => (
-            <div key={`${url}-${idx}`} className={styles.row}>
+          filtered.map((a, idx) => (
+            <div
+              key={a.applicationShareId ?? `${a.link}-${idx}`}
+              className={styles.row}
+            >
               <div className={styles.left}>
                 <div className={styles.index}>{idx + 1}</div>
-                <a className={styles.url} href={url} target="_blank" rel="noreferrer">
-                  {url}
+
+                <div className={styles.meta}>
+                  <span className={styles.name}>{a.name}</span>
+                  <span className={styles.id}>#{a.applicationShareId}</span>
+                </div>
+
+                <a
+                  className={styles.url}
+                  href={a.link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {a.link}
                 </a>
-                {copiedLink === url && <span className={styles.badge}>복사됨</span>}
+
+                {copiedLink === a.link && (
+                  <span className={styles.badge}>복사됨</span>
+                )}
               </div>
 
               <div className={styles.right}>
-                <button className={styles.small} onClick={() => window.open(url, "_blank")}>
+                <button
+                  className={styles.small}
+                  onClick={() => window.open(a.link, "_blank")}
+                >
                   새 탭
                 </button>
-                <button className={styles.small} onClick={() => copyToClipboard(url)}>
+                <button
+                  className={styles.small}
+                  onClick={() => copyToClipboard(a.link)}
+                >
                   복사
+                </button>
+                <button
+                  className={styles.small}
+                  onClick={() => handleDelete(a.applicationShareId)}
+                >
+                  삭제
                 </button>
               </div>
             </div>
           ))
         )}
+        {toast && <div className={styles.toast}>{toast}</div>}
       </main>
     </div>
   );
