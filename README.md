@@ -1,73 +1,121 @@
-# React + TypeScript + Vite
+# SWUWEB Homepage
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+서울여자대학교 웹 개발 소학회 **SWUWEB**의 공식 홈페이지 프로젝트입니다.  
+본 프로젝트는 **학회 소개와 신입 부원 모집을 실제로 진행하기 위해 제작된 운영용 웹사이트**로,  
+기획 · 디자인 · 개발 · 배포 전 과정을 직접 담당하여 완성했습니다.
 
-Currently, two official plugins are available:
+> 📢 **2026년 1학기 SWUWEB 신입 부원 모집을 본 홈페이지를 통해 실제로 진행하였습니다.**  
+> 모집 안내, 일정 공지, 지원 CTA 모두 본 페이지를 기준으로 운영되었습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 **Live Demo**  
+https://swuweb-homepage.vercel.app
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ 프로젝트 개요
 
-## Expanding the ESLint configuration
+- **프로젝트 목적**
+  - SWUWEB 학회의 정체성과 활동 방향을 공식적으로 소개
+  - 신입 학회원 모집을 위한 **단일 공식 안내 페이지** 제공
+  - 학회의 가치, 활동 방식, 결과물을 시각적으로 전달
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **실제 활용**
+  - 학회 공식 홍보 채널(인스타그램, 오픈채팅 등)에서  
+    **본 홈페이지 링크를 통해 지원 안내 및 모집 진행**
+  - 모집 기간 동안 지원 CTA 활성화 및 일정 안내 페이지로 사용
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠 Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Frontend**
+  - React
+  - TypeScript
+  - Vite
+
+- **Styling**
+  - CSS Module
+  - Flex / Grid 기반 반응형 레이아웃
+  - SVG 및 커스텀 도형을 활용한 시각적 요소
+
+- **Tooling & Deploy**
+  - ESLint
+  - Vercel (자동 배포)
+
+---
+
+## 🧩 주요 구현 내용
+
+### 1. 랜딩 페이지 설계
+- Hero 섹션을 통한 학회 핵심 메시지 전달
+- SWUWEB의 Core Value(S · W · U)를 시각적으로 표현
+- 프로젝트 카드 섹션을 통한 활동 결과 소개
+- 모집 일정 및 프로세스 안내 섹션 구성
+
+### 2. 실제 모집을 위한 CTA 로직
+- 모집 시작 시점 기준으로 버튼 상태 분기
+- 모집 기간 이전 클릭 시 안내 메시지 제공
+- 모집 기간 동안만 활성화되는 지원 버튼 구현
+
+### 3. 라우트 접근 제어
+- 운영진 전용 페이지 접근 시
+  **일반 사용자는 접근할 수 없도록 라우트 가드 적용**
+- 실제 운영 환경을 고려한 권한 분리 구조
+
+### 4. 인터랙션 & UX
+- 스크롤 진입 시 자연스럽게 등장하는 애니메이션
+- 카드 hover 및 transition 효과
+- 정보 위계가 명확한 타이포그래피와 여백 설계
+
+---
+
+## 📁 프로젝트 구조
+
+```txt
+src/
+ ├─ components/     # 공통 UI 컴포넌트
+ ├─ pages/          # 랜딩 페이지 및 화면 단위 구성
+ ├─ routes/         # 라우트 정의 및 운영진 페이지 접근 제어
+ ├─ hooks/          # 커스텀 훅 (스크롤 / 인터섹션 옵저버 등)
+ ├─ styles/         # CSS Module (스크롤 애니메이션 포함)
+ ├─ assets/         # 이미지 / SVG 리소스
+ ├─ types/          # SVG import를 위한 TypeScript module 선언
+ ├─ App.tsx         # 전체 라우트 및 레이아웃 구성
+ └─ main.tsx        # 애플리케이션 진입점
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 실행 방법
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# 패키지 설치
+npm install
+
+# 개발 서버 실행
+npm run dev
+
+# 프로덕션 빌드
+npm run build
+
+# 빌드 결과 미리보기
+npm run preview
 ```
+
+---
+
+## 🌱 프로젝트 회고
+
+- 단순한 연습용 프로젝트가 아닌 **실제 학회 운영과 신입 학회원 모집에 사용된 웹사이트**를 제작
+- 사용자 행동(지원)을 유도하는 랜딩 페이지 관점에서 정보 흐름과 CTA 배치를 설계
+- 운영진 페이지 접근 제어, 일정 기반 UI 분기 등 실서비스 환경을 고려한 프론트엔드 구현 경험을 쌓음
+
+---
+
+## 👩‍💻 Author
+
+**이채영**  
+서울여자대학교 소프트웨어융합학과  
+Frontend Developer  
+
+- GitHub: https://github.com/chae1125
